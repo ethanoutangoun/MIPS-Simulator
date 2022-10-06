@@ -40,7 +40,7 @@ public class assembler extends Instructions{
 
 
 
-         String data = "   add $v0, $v1, $v1#100";
+         String data = "     addi $t0, $t0, 100 #test";
          data = data.trim(); //Removes leading and trailing whitespace
          System.out.println(data);
       
@@ -52,16 +52,30 @@ public class assembler extends Instructions{
          
          if (arg[0].equals("add"))
          {
-
-            
-            
+            if (arg.length >4 && !arg[4].startsWith("#")){ //If there are more than 4 args, check if it is a comment
+               System.out.println("invalid arguments");
+            }
+            else
+            {
             System.out.println(Instructions.add(arg[2],arg[3],arg[1]));
+            }
             
 
          }
 
+
+         else if (arg[0].equals("addi"))
+         {
+            if (arg.length >4 && !arg[4].startsWith("#")){ //If there are more than 4 args, check if it is a comment
+               System.out.println("invalid arguments");
+            }
+            else{
+            System.out.println(Instructions.addi(arg[2],arg[1], arg[3]));
+            }
+         }
          
 
+         
 
 
 

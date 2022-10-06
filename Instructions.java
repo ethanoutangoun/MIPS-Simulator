@@ -18,6 +18,7 @@ public class Instructions {
         String retString = "";
         retString += "000000";
 
+        //Checking for Invalid Arguments
         if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")) 
         || (functions.registerToBinary(rd).equals("$")))
         {
@@ -51,5 +52,43 @@ public class Instructions {
     }
 
 
-    
+    public static String addi(String rs, String rt, String imm){
+
+
+        String bin;
+        //parse imm to bin
+        if (imm.indexOf("#") != -1)
+        {
+            imm = imm.substring(0,(imm.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(imm);
+            bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+            
+            
+        }
+        catch(Exception e){
+            System.out.println("invalid arguments");
+            return "";
+        }
+
+
+        
+
+
+        String retString = "";
+        retString += "001000";
+
+        retString+= " " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) 
+        + " " + bin;
+
+
+        return retString;
+    }
+
+
 }
