@@ -34,13 +34,17 @@ public class Instructions {
                 rt = rt.substring(0,2); //Make rt a valid argument
             }
           
-            if(temp.startsWith("#")){
-               //Do nothing
+            if(!temp.startsWith("#")){
+                return "invalid arguments";
             }
-            else
+    
+
+            if(functions.registerToBinary(rt).equals("$"))
             {
-            return "Invalid Arguments";
+                return "invalid arguments";
             }
+
+            
         }
 
 

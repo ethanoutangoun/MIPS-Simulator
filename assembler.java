@@ -27,11 +27,14 @@ public class assembler extends Instructions{
            //Removes lines starting with #
            if(!data.startsWith("#"))
            {
-            //System.out.println(data);
-           }
+            //Insert Code here
             
 
 
+
+
+           }
+            
            //System.out.println(data);
          }
          myReader.close();
@@ -40,7 +43,7 @@ public class assembler extends Instructions{
 
 
 
-         String data = "     addi $t0, $t0, 100 #test";
+         String data = "     addi $t0, $t0, 100#test comment";
          data = data.trim(); //Removes leading and trailing whitespace
          System.out.println(data);
       
@@ -52,7 +55,7 @@ public class assembler extends Instructions{
          
          if (arg[0].equals("add"))
          {
-            if (arg.length >4 && !arg[4].startsWith("#")){ //If there are more than 4 args, check if it is a comment
+            if (arg.length >4 && !arg[4].startsWith("#")  && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
                System.out.println("invalid arguments");
             }
             else
@@ -66,7 +69,7 @@ public class assembler extends Instructions{
 
          else if (arg[0].equals("addi"))
          {
-            if (arg.length >4 && !arg[4].startsWith("#")){ //If there are more than 4 args, check if it is a comment
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
                System.out.println("invalid arguments");
             }
             else{
