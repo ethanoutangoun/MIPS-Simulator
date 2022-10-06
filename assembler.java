@@ -37,16 +37,44 @@ public class assembler extends Instructions{
          myReader.close();
 
    
-         System.out.println(functions.registerToBinary("$t9"));
 
 
-         String test = "   add $v0, $v1, $v1";
-         //test = test.replaceAll("\\s+",""); //Removes all whitespace
 
-         test = test.trim(); //Removes leading and trailing whitespace
-         System.out.println(test);
-         System.out.println(test.startsWith("add"));
-         System.out.println(Instructions.add("$t0", "$s1", "s2"));
+         String data = "   add $v0, $v1, $v1#100";
+         data = data.trim(); //Removes leading and trailing whitespace
+         System.out.println(data);
+      
+
+
+         //Section to determine what instruction //Multiple if else statements with startsWith()
+         data = data.replaceAll(",", "");
+         String arg[] = data.split("\\s+");
+         
+         if (arg[0].equals("add"))
+         {
+
+            
+            
+            System.out.println(Instructions.add(arg[2],arg[3],arg[1]));
+            
+
+         }
+
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

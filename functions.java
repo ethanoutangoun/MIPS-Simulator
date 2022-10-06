@@ -5,6 +5,9 @@ public class functions {
         switch(reg){
             case "$0":
                 return "00000";
+            case "$zero":
+                return "00000";
+            
             case "$v0":
                 return "00010";
             case "$v1":
@@ -81,7 +84,7 @@ public class functions {
 
 
         }
-        return "";
+        return "$";
     }
 
 
