@@ -3,7 +3,7 @@ public class test {
 
 
 
-        String data = "sll $a0, $a0, 10#test comment";
+        String data = "sub $a0, $a0, $v1#test comment";
 
 
          data = data.trim(); //Removes leading and trailing whitespace
@@ -11,7 +11,7 @@ public class test {
       
 
 
-         //Section to determine what instruction //Multiple if else statements with startsWith()
+         //Section to determine what instruction 
          data = data.replaceAll(",", " ");
          String arg[] = data.split("\\s+");
         
@@ -42,7 +42,8 @@ public class test {
 
 
          //AND
-         else if(arg[0].equals("and")){
+         else if(arg[0].equals("and"))
+         {
 
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
             { 
@@ -54,7 +55,6 @@ public class test {
             }
 
          }
-
 
 
          //SLL
@@ -72,7 +72,20 @@ public class test {
          }
 
 
+         //SUB
+         else if(arg[0].equals("sub"))
+         {
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
+            { 
+                System.out.println("invalid arguments");
+            }
+            else
+            {
+                System.out.println(Instructions.sub(arg[2],arg[3], arg[1]));
+            }
 
+
+         }
 
 
 

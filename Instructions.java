@@ -85,6 +85,12 @@ public class Instructions {
         
         }
 
+
+        if(((functions.registerToBinary(rt).equals("$"))  || (functions.registerToBinary(rs).equals("$"))))
+        {
+            return "invalid arguments";
+        }
+
         String retString = "";
         retString += "001000";
 
@@ -134,14 +140,15 @@ public class Instructions {
         
         try
         {
-            
-            
             Integer temp = Integer.parseInt(shamt);
             bin = Integer.toBinaryString(0x20 | temp).substring(1);
-            
-            
         }
         catch(Exception e){
+            return "invalid arguments";
+        }
+
+        if(((functions.registerToBinary(rt).equals("$"))  || (functions.registerToBinary(rd).equals("$"))))
+        {
             return "invalid arguments";
         }
 
@@ -153,6 +160,25 @@ public class Instructions {
     }
 
 
+    public static String sub(String rs, String rt, String rd)
+    {
 
+        if (rt.indexOf("#")!= -1)
+        {
+            rt = rt.substring(0,(rt.indexOf("#")));
+        }
+        
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")) 
+        || (functions.registerToBinary(rd).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+        String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) + " 100010";
+        return retString;
+
+    }
 
 }
