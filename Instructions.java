@@ -23,6 +23,11 @@ public class Instructions {
         || (functions.registerToBinary(rd).equals("$")))
         {
             String temp;
+            if(rt.length()<3)
+            {
+                return "invalid arguments";
+            }
+
             if (!rt.startsWith("$0"))
             {
                 temp = rt.substring(3);
@@ -94,5 +99,29 @@ public class Instructions {
         return retString;
     }
 
+
+    public static String and(String rs, String rt, String rd){
+
+        if (rt.indexOf("#")!= -1)
+        {
+            rt = rt.substring(0,(rt.indexOf("#")));
+        }
+        
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")) 
+        || (functions.registerToBinary(rd).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+        String retString = "";
+        retString += "000000";
+
+        retString+= " " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rd)
+         + " " + functions.registerToBinary(rt) + " 00000 100100" ;
+        return retString;
+
+    }
 
 }

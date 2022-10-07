@@ -43,15 +43,16 @@ public class assembler extends Instructions{
 
 
 
-         String data = "     addi $t0, $t0, 100#test comment";
+         String data = "addi $a0, $a0, -1";
          data = data.trim(); //Removes leading and trailing whitespace
          System.out.println(data);
       
 
 
          //Section to determine what instruction //Multiple if else statements with startsWith()
-         data = data.replaceAll(",", "");
+         data = data.replaceAll(",", " ");
          String arg[] = data.split("\\s+");
+        
          
          if (arg[0].equals("add"))
          {
