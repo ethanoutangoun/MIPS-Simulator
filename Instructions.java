@@ -204,4 +204,9 @@ public class Instructions {
     }
 
 
+    public static String beq(String rs, String rt, String offset)
+    {
+        return "";
+    }
+
 }

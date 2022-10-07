@@ -1,5 +1,7 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
@@ -13,6 +15,11 @@ public class assembler extends Instructions{
          return;
       }
       */
+
+
+      Dictionary labels = new Hashtable<>();
+
+      int line = 1;
 
       try {
          //File myObj = new File(args[0]);
@@ -28,56 +35,23 @@ public class assembler extends Instructions{
            if(!data.startsWith("#"))
            {
             //Insert Code here
-            
 
+            
 
 
 
            }
-            
-           //System.out.println(data);
+            //System.out.println(line);
+           line+=1;
          }
+
+
+
          myReader.close();
 
    
 
 
-
-         String data = "addi $a0, $a0, -1";
-         data = data.trim(); //Removes leading and trailing whitespace
-         System.out.println(data);
-      
-
-
-         //Section to determine what instruction //Multiple if else statements with startsWith()
-         data = data.replaceAll(",", " ");
-         String arg[] = data.split("\\s+");
-        
-         
-         if (arg[0].equals("add"))
-         {
-            if (arg.length >4 && !arg[4].startsWith("#")  && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
-               System.out.println("invalid arguments");
-            }
-            else
-            {
-            System.out.println(Instructions.add(arg[2],arg[3],arg[1]));
-            }
-            
-
-         }
-
-
-         else if (arg[0].equals("addi"))
-         {
-            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
-               System.out.println("invalid arguments");
-            }
-            else{
-            System.out.println(Instructions.addi(arg[2],arg[1], arg[3]));
-            }
-         }
-         
 
          
 

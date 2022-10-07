@@ -1,13 +1,44 @@
 public class test {
+
+ 
+
     public static void main(String args[]){
 
 
 
-        String data = "	slti$t0,$a0,$a1";
+        String data = "test:add $s0, $s0, $a0 # this is a comment";
 
 
-         data = data.trim(); //Removes leading and trailing whitespace
-         System.out.println(data);
+        //Adds space between instruction and first argument
+        if(data.indexOf("$") !=-1)
+        {
+              String temp = data.substring(0, data.indexOf("$"));
+              String temp2 = data.substring(data.indexOf("$"));
+              data = temp + " " + temp2;
+
+        }
+
+        //Format Data into array
+           data = data.replaceAll(",", " ");
+           String arg[] = data.split("\\s+");
+
+
+            System.out.println(arg[0]);
+           System.out.println(data);
+
+
+
+        //processData(data);
+
+         
+         
+    }
+
+
+    public static void processData(String data)
+    {
+        data = data.trim(); //Removes leading and trailing whitespace
+         //System.out.println(data);
       
 
 
@@ -100,6 +131,7 @@ public class test {
 
          }
 
+         //SLT
          else if(arg[0].equals("slt"))
          {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
@@ -113,18 +145,26 @@ public class test {
 
 
 
+
          }
 
 
 
 
 
-
+         else if(arg.length == 1 && arg[0].equals(""))
+         {
+    
+         }
 
 
          else{
+            
             System.out.println("invalid instruction: " + arg[0]);
          }
-         
+
     }
+
+
+
 }
