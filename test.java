@@ -3,7 +3,7 @@ public class test {
 
 
 
-        String data = "and $a0, $s0, $t1#test comment";
+        String data = "sll $a0, $a0, 10#test comment";
 
 
          data = data.trim(); //Removes leading and trailing whitespace
@@ -15,7 +15,7 @@ public class test {
          data = data.replaceAll(",", " ");
          String arg[] = data.split("\\s+");
         
-         
+         //ADD
          if (arg[0].equals("add"))
          {
             if (arg.length >4 && !arg[4].startsWith("#")  && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
@@ -29,7 +29,7 @@ public class test {
 
          }
 
-
+         //ADDI
          else if (arg[0].equals("addi"))
          {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
@@ -41,6 +41,7 @@ public class test {
          }
 
 
+         //AND
          else if(arg[0].equals("and")){
 
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
@@ -55,6 +56,20 @@ public class test {
          }
 
 
+
+         //SLL
+         else if(arg[0].equals("sll"))
+         {
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
+            { 
+                System.out.println("invalid arguments");
+            }
+            else
+            {
+                System.out.println(Instructions.sll(arg[2],arg[3], arg[1]));
+            }
+            
+         }
 
 
 

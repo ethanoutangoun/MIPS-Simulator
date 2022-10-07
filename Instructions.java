@@ -81,13 +81,9 @@ public class Instructions {
             
         }
         catch(Exception e){
-            System.out.println("invalid arguments");
-            return "";
-        }
-
-
+            return "invalid arguments";
         
-
+        }
 
         String retString = "";
         retString += "001000";
@@ -123,5 +119,40 @@ public class Instructions {
         return retString;
 
     }
+
+
+
+    public static String sll(String rt, String shamt, String rd )
+    {
+
+        String bin;
+        //parse shamt to bin
+        if (shamt.indexOf("#") != -1)
+        {
+            shamt = shamt.substring(0,(shamt.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer temp = Integer.parseInt(shamt);
+            bin = Integer.toBinaryString(0x20 | temp).substring(1);
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        }
+
+
+        String retString = "000000 00000 ";
+        retString+= functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) 
+        + " " + bin + " 000000";
+        return retString;
+    }
+
+
+
 
 }
