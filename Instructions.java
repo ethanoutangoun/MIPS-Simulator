@@ -176,9 +176,32 @@ public class Instructions {
         }
 
 
-        String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) + " 100010";
+        String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) + " 00000 100010";
         return retString;
 
     }
+
+
+    public static String slt(String rs, String rt, String rd)
+    {
+
+        if (rt.indexOf("#")!= -1)
+        {
+            rt = rt.substring(0,(rt.indexOf("#")));
+        }
+        
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")) 
+        || (functions.registerToBinary(rd).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+
+        String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) + " 00000 101010";
+        return retString;
+    }
+
 
 }

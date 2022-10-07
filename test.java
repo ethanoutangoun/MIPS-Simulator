@@ -3,7 +3,7 @@ public class test {
 
 
 
-        String data = "sub $a0, $a0, $v1#test comment";
+        String data = "	slti$t0,$a0,$a1";
 
 
          data = data.trim(); //Removes leading and trailing whitespace
@@ -11,10 +11,23 @@ public class test {
       
 
 
-         //Section to determine what instruction 
+         
+
+         //Adds space between instruction and first argument
+        if(data.indexOf("$") !=-1)
+        {
+            String temp = data.substring(0, data.indexOf("$"));
+            String temp2 = data.substring(data.indexOf("$"));
+            data = temp + " " + temp2;
+
+        }
+
+        //Format Data into array
          data = data.replaceAll(",", " ");
          String arg[] = data.split("\\s+");
         
+
+         //Section to determine what instruction 
          //ADD
          if (arg[0].equals("add"))
          {
@@ -83,6 +96,21 @@ public class test {
             {
                 System.out.println(Instructions.sub(arg[2],arg[3], arg[1]));
             }
+
+
+         }
+
+         else if(arg[0].equals("slt"))
+         {
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
+            { 
+                System.out.println("invalid arguments");
+            }
+            else
+            {
+                System.out.println(Instructions.slt(arg[2],arg[3], arg[1]));
+            }
+
 
 
          }
