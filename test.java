@@ -1,31 +1,26 @@
-public class test {
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
 
- 
+import javax.security.auth.callback.LanguageCallback;
+
+
+public class test {
+    
 
     public static void main(String args[]){
 
 
+        HashMap<String,Integer> labels = new HashMap<>();
+        String data = "addi $a0, $a0, 100";
+        int line = 18;
 
-        String data = "test:add $s0, $s0, $a0 # this is a comment";
+        processLabels(data, line, labels);
 
+        System.out.println(data);
+        processData(data);
 
-        //Adds space between instruction and first argument
-        if(data.indexOf("$") !=-1)
-        {
-              String temp = data.substring(0, data.indexOf("$"));
-              String temp2 = data.substring(data.indexOf("$"));
-              data = temp + " " + temp2;
-
-        }
-
-        //Format Data into array
-           data = data.replaceAll(",", " ");
-           String arg[] = data.split("\\s+");
-
-
-            System.out.println(arg[0]);
-           System.out.println(data);
-
+       
 
 
         //processData(data);
@@ -34,9 +29,57 @@ public class test {
          
     }
 
+    public static boolean processLabels(String data, Integer line, HashMap<String,Integer> labels)
+    {
+         //Adds space between instruction and first argument
+         if(data.indexOf("$") !=-1)
+         {
+             String temp = data.substring(0, data.indexOf("$"));
+             String temp2 = data.substring(data.indexOf("$"));
+             data = temp + " " + temp2;
+ 
+         }
+ 
+    
+ 
+         //Format Data into array
+         data = data.replaceAll(",", " ");
+         data = data.replaceAll(":", ": ");
+         String arg[] = data.split("\\s+");
+ 
+         if(arg[0].endsWith(":"))
+         {
+             String labelName = arg[0].substring(0,arg[0].length()-1);
+             if (labelName.length()>0 && !labels.containsKey(labelName)){
+                 labels.put(labelName, line);
+             }
+             else if(labelName.length() == 0)
+             {
+                System.out.println("invalid label: \"" + arg[0] + "\"");
+                return false;
+             }
+             else
+             {
+                System.out.println("Label already exists: \"" + arg[0] + "\"");
+                return false;
+             }
+ 
+            
+             
+ 
+ 
+         }
+        
+         
+
+         return true;
+ 
+    }
+
 
     public static void processData(String data)
     {
+        data = data.substring(data.indexOf(":")+1);
         data = data.trim(); //Removes leading and trailing whitespace
          //System.out.println(data);
       
@@ -54,9 +97,14 @@ public class test {
         }
 
         //Format Data into array
+        data = data.replaceAll(":", ": ");
          data = data.replaceAll(",", " ");
+         
          String arg[] = data.split("\\s+");
         
+         //Deal with labels on second pass
+        
+
 
          //Section to determine what instruction 
          //ADD
@@ -80,6 +128,8 @@ public class test {
                System.out.println("invalid arguments");
             }
             else{
+
+            
             System.out.println(Instructions.addi(arg[2],arg[1], arg[3]));
             }
          }
@@ -152,9 +202,12 @@ public class test {
 
 
 
+        
+
+
          else if(arg.length == 1 && arg[0].equals(""))
          {
-    
+            //Do nothing with empty lines
          }
 
 

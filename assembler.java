@@ -1,7 +1,6 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
@@ -17,7 +16,7 @@ public class assembler extends Instructions{
       */
 
 
-      Dictionary labels = new Hashtable<>();
+      HashMap<String,Integer> labels = new HashMap<>();
 
       int line = 1;
 
@@ -34,8 +33,8 @@ public class assembler extends Instructions{
            //Removes lines starting with #
            if(!data.startsWith("#"))
            {
-            //Insert Code here
-
+               //test.processLabels(data, line, labels);
+               test.processData(data);
             
 
 
@@ -52,7 +51,7 @@ public class assembler extends Instructions{
    
 
 
-
+         //System.out.println(labels.size());
          
 
 

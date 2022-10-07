@@ -76,7 +76,15 @@ public class Instructions {
             
             
             Integer immediate = Integer.parseInt(imm);
+            
+            
             bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+            if(bin.length()>16)
+            {
+                bin = bin.substring(15);
+            }
             
             
         }
@@ -97,7 +105,7 @@ public class Instructions {
         retString+= " " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) 
         + " " + bin;
 
-
+      
         return retString;
     }
 
