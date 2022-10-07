@@ -212,9 +212,46 @@ public class Instructions {
     }
 
 
+
+    //NOT DONE YET NEED TO ADD OFFSET
     public static String beq(String rs, String rt, String offset)
     {
-        return "";
+
+
+        String retString = "000100 " + functions.registerToBinary(rs) + " "  + functions.registerToBinary(rt); //MISSING OFFSET ADD OFFSET
+        return retString;
+    }
+
+
+    public static String or(String rs, String rt, String rd)
+    {
+
+        if (rt.indexOf("#")!= -1)
+        {
+            rt = rt.substring(0,(rt.indexOf("#")));
+        }
+        
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")) 
+        || (functions.registerToBinary(rd).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+        String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt)
+        + " " + functions.registerToBinary(rd) + " 00000 100101";
+
+        return retString;
+    }
+
+
+    //NOT DONE YET NEED TO ADD OFFSET
+    public static String lw(String rs, String rt, String offset)
+    {
+
+        String retString = "100011 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt);
+        return retString;
+
     }
 
 }

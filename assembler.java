@@ -22,7 +22,7 @@ public class assembler extends Instructions{
 
       try {
          //File myObj = new File(args[0]);
-         File myObj = new File("test1.asm");
+         File myObj = new File("test4.asm");
          Scanner myReader = new Scanner(myObj);
          while (myReader.hasNextLine()) {
 
@@ -33,9 +33,13 @@ public class assembler extends Instructions{
            //Removes lines starting with #
            if(!data.startsWith("#"))
            {
-               //test.processLabels(data, line, labels);
-               test.processData(data);
             
+               boolean exit = test.processData(data);
+               if(!exit)
+               {
+                  break;
+               }
+
 
 
 

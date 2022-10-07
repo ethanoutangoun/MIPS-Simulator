@@ -12,7 +12,7 @@ public class test {
 
 
         HashMap<String,Integer> labels = new HashMap<>();
-        String data = "addi $a0, $a0, 100";
+        String data = "or $s0, $s1, $s2";
         int line = 18;
 
         processLabels(data, line, labels);
@@ -77,7 +77,7 @@ public class test {
     }
 
 
-    public static void processData(String data)
+    public static boolean processData(String data)
     {
         data = data.substring(data.indexOf(":")+1);
         data = data.trim(); //Removes leading and trailing whitespace
@@ -112,6 +112,9 @@ public class test {
          {
             if (arg.length >4 && !arg[4].startsWith("#")  && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
                System.out.println("invalid arguments");
+                return false;
+
+
             }
             else
             {
@@ -126,6 +129,8 @@ public class test {
          {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1){ //If there are more than 4 args, check if it is a comment
                System.out.println("invalid arguments");
+                return false;
+
             }
             else{
 
@@ -142,6 +147,7 @@ public class test {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
             { 
                 System.out.println("invalid arguments");
+                return false;
             }
             else
             {
@@ -157,6 +163,7 @@ public class test {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
             { 
                 System.out.println("invalid arguments");
+                return false;
             }
             else
             {
@@ -172,6 +179,7 @@ public class test {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
             { 
                 System.out.println("invalid arguments");
+                return false;
             }
             else
             {
@@ -187,18 +195,31 @@ public class test {
             if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
             { 
                 System.out.println("invalid arguments");
+                return false;
             }
             else
             {
                 System.out.println(Instructions.slt(arg[2],arg[3], arg[1]));
             }
 
-
-
-
          }
 
 
+         else if(arg[0].equals("or"))
+         {
+
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1)
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else
+            {
+                System.out.println(Instructions.or(arg[2],arg[3], arg[1]));
+                
+            }
+
+         }
 
 
 
@@ -214,8 +235,10 @@ public class test {
          else{
             
             System.out.println("invalid instruction: " + arg[0]);
+            return false;
          }
 
+         return true;
     }
 
 
