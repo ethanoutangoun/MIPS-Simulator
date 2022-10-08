@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
+
+
+
 public class assembler extends Instructions{
 
+   
     public static void main(String []args) {
 
       /* 
@@ -22,8 +26,11 @@ public class assembler extends Instructions{
 
       try {
          //File myObj = new File(args[0]);
-         File myObj = new File("test4.asm");
+         File myObj = new File("test2.asm");
          Scanner myReader = new Scanner(myObj);
+
+
+         //First Iteration
          while (myReader.hasNextLine()) {
 
 
@@ -31,31 +38,63 @@ public class assembler extends Instructions{
            data = data.trim();
 
            //Removes lines starting with #
-           if(!data.startsWith("#"))
+           if(!data.startsWith("#") && !(data.length()==1) && !(data.equals("")) )
            {
-            
-               boolean exit = test.processData(data);
+               
+               test.processLabels(data, line, labels);
+
+               if (!(data.endsWith(":")))
+               {
+                  line+=1;
+               }
+           }
+          
+           
+         }
+         myReader.close();
+
+
+
+
+
+         
+         //Second Iteration
+         line = 1;
+         myReader = new Scanner(myObj);
+         while (myReader.hasNextLine()) 
+         {
+            String data = myReader.nextLine();
+            data = data.trim();
+            //Removes lines starting with #, empty lines and labels
+           if(!data.startsWith("#") && !(data.length()==1) && !(data.equals("")) && !(data.endsWith(":")))
+           {
+               
+               boolean exit = test.processData(data,labels,line);
                if(!exit)
                {
-                  break;
+                  //break;
                }
 
 
-
-
+               //System.out.println(line);
+               line+=1;
+               
            }
-            //System.out.println(line);
-           line+=1;
+            
+
+
          }
-
-
-
          myReader.close();
+
+         
+
+
+
 
    
 
 
-         //System.out.println(labels.size());
+         System.out.println(labels.containsKey("testa"));
          
 
 

@@ -222,6 +222,55 @@ public class Instructions {
         return retString;
     }
 
+    
+
+    
+    public static String bne(String rs, String rt, String offset)
+    {
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+            if(bin.length()>16)
+            {
+                bin = bin.substring(15);
+            }
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+
+
+
+        String retString = "000101 " + functions.registerToBinary(rs) +  " " + functions.registerToBinary(rt) + " "
+        + bin;
+        return retString;
+    }
+
+
 
     public static String or(String rs, String rt, String rd)
     {

@@ -12,13 +12,14 @@ public class test {
 
 
         HashMap<String,Integer> labels = new HashMap<>();
-        String data = "or $s0, $s1, $s2";
-        int line = 18;
+        labels.put("test",4);
+        String data = "bne $a0, $0, test	# this is another comment";
+        int line = 6;
 
         processLabels(data, line, labels);
 
         System.out.println(data);
-        processData(data);
+        processData(data,labels,line);
 
        
 
@@ -77,7 +78,7 @@ public class test {
     }
 
 
-    public static boolean processData(String data)
+    public static boolean processData(String data, HashMap<String,Integer> labels, Integer line)
     {
         data = data.substring(data.indexOf(":")+1);
         data = data.trim(); //Removes leading and trailing whitespace
@@ -205,6 +206,7 @@ public class test {
          }
 
 
+         //OR
          else if(arg[0].equals("or"))
          {
 
@@ -221,6 +223,41 @@ public class test {
 
          }
 
+
+         //BNE
+         else if(arg[0].equals("bne"))
+         {
+
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else
+            {
+
+                
+                //Compute offset here so less clunky
+                if (labels.containsKey(arg[3]))
+                {
+                Integer targetLine = labels.get(arg[3]);
+                String offset = Integer.toString(targetLine - (line+1));
+                System.out.println(Instructions.bne(arg[2],arg[1], offset));
+                }
+                else
+                {
+                    System.out.println("invalid label: " + arg[3]);
+                    return false;
+                }
+                
+              
+               
+                
+                
+            }
+
+
+         }
 
 
         
