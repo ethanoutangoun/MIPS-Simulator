@@ -3,9 +3,7 @@
 public class Instructions {
 
    
-
-
-    //Will return binary for add function
+    
     public static String add(String rs, String rt, String rd){
 
         //Parse $zero to $0
@@ -61,6 +59,7 @@ public class Instructions {
     }
 
 
+
     public static String addi(String rs, String rt, String imm){
 
 
@@ -108,6 +107,7 @@ public class Instructions {
       
         return retString;
     }
+
 
 
     public static String and(String rs, String rt, String rd){
@@ -168,6 +168,7 @@ public class Instructions {
     }
 
 
+
     public static String sub(String rs, String rt, String rd)
     {
 
@@ -190,6 +191,7 @@ public class Instructions {
     }
 
 
+
     public static String slt(String rs, String rt, String rd)
     {
 
@@ -210,7 +212,6 @@ public class Instructions {
         String retString = "000000 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + functions.registerToBinary(rd) + " 00000 101010";
         return retString;
     }
-
 
 
   
@@ -260,7 +261,6 @@ public class Instructions {
     }
 
     
-
     
     public static String bne(String rs, String rt, String offset)
     {
@@ -348,6 +348,7 @@ public class Instructions {
     }
 
 
+
     public static String jal(String offset)
     {
         String bin;
@@ -385,8 +386,6 @@ public class Instructions {
         String retString = "000011 "  + bin; 
         return retString;
     }
-
-
 
 
 
