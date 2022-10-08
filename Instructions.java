@@ -412,13 +412,117 @@ public class Instructions {
     }
 
 
-    //NOT DONE YET NEED TO ADD OFFSET
+   
     public static String lw(String rs, String rt, String offset)
     {
 
-        String retString = "100011 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt);
+
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+            if(bin.length()>16)
+            {
+                bin = bin.substring(15);
+            }
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+
+        String retString = "100011 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + bin;
         return retString;
 
+    }
+
+
+
+    public static String sw(String rs, String rt, String offset)
+    {
+
+
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+            if(bin.length()>16)
+            {
+                bin = bin.substring(15);
+            }
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")))
+        {
+            return "invalid arguments";
+        }
+
+
+
+        String retString = "101011 " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt) + " " + bin;
+        return retString;
+
+    }
+
+
+
+    public static String jr(String rs){
+
+        if (rs.indexOf("#")!= -1)
+        {
+            rs = rs.substring(0,(rs.indexOf("#")));
+        }
+
+        if(functions.registerToBinary(rs).equals("$"))
+        {
+            return "invalid arguments";
+        }
+
+        
+
+        String retString = "000000 " + functions.registerToBinary(rs) + " 000000000000000 001000";
+        return retString;
     }
 
 }

@@ -1,3 +1,4 @@
+import java.security.DomainLoadStoreParameter;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -15,7 +16,7 @@ public class test {
         labels.put("test2",-4);
 
 
-        String data = "j test2";
+        String data = "jr	$ra";
 
 
 
@@ -103,9 +104,14 @@ public class test {
         }
 
         //Format Data into array
+        
         data = data.replaceAll(":", ": ");
          data = data.replaceAll(",", " ");
+         data = data.replaceAll("\\(", " ");
+         data = data.replaceAll("\\)", " ");
          
+
+        
          String arg[] = data.split("\\s+");
         
          //Deal with labels on second pass
@@ -343,6 +349,8 @@ public class test {
          }
 
 
+
+         //JAl
          else if(arg[0].equals("jal"))
          {
 
@@ -378,6 +386,66 @@ public class test {
 
 
            
+
+
+         }
+
+
+
+         //LW
+         else if(arg[0].equals("lw"))
+         {
+
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else{
+
+                System.out.println(Instructions.lw(arg[3],arg[1], arg[2]));
+
+            }
+
+            
+
+
+         }
+
+         //SW
+         else if(arg[0].equals("sw"))
+         {
+
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else{
+
+                System.out.println(Instructions.sw(arg[3],arg[1], arg[2]));
+
+            }
+
+            
+
+
+         }
+
+         //JR
+         else if(arg[0].equals("jr"))
+         {
+
+            if (arg.length >2 && !arg[2].startsWith("#") && arg[1].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else
+            {
+                System.out.println(Instructions.jr(arg[1]));
+            }
+
 
 
          }
