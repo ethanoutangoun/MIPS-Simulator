@@ -7,17 +7,17 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 
 
-public class assembler extends Instructions{
+public class lab2 extends Instructions{
 
    
     public static void main(String []args) {
 
-      /* 
+      
       if (args.length == 0){
          System.out.println("Please enter argument in command line");
          return;
       }
-      */
+      
 
 
       HashMap<String,Integer> labels = new HashMap<>();
@@ -25,8 +25,8 @@ public class assembler extends Instructions{
       int line = 1;
 
       try {
-         //File myObj = new File(args[0]);
-         File myObj = new File("test1.asm");
+         File myObj = new File(args[0]);
+         //File myObj = new File("functions1.asm");
          Scanner myReader = new Scanner(myObj);
 
 
@@ -41,7 +41,7 @@ public class assembler extends Instructions{
            if(!data.startsWith("#") && !(data.length()==1) && !(data.equals("")) )
            {
                
-               test.processLabels(data, line, labels);
+               functions.processLabels(data, line, labels);
 
                if (!(data.endsWith(":")))
                {
@@ -69,10 +69,10 @@ public class assembler extends Instructions{
            if(!data.startsWith("#") && !(data.length()==1) && !(data.equals("")) && !(data.endsWith(":")))
            {
                
-               boolean exit = test.processData(data,labels,line);
+               boolean exit = functions.processData(data,labels,line);
                if(!exit)
                {
-                  //break;
+                  break;
                }
 
 
@@ -94,7 +94,7 @@ public class assembler extends Instructions{
    
 
 
-         //System.out.println(labels.containsKey("testa"));
+         //System.out.println(labels.containsKey("functionsa"));
          
 
 
