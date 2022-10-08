@@ -12,8 +12,13 @@ public class test {
 
 
         HashMap<String,Integer> labels = new HashMap<>();
-        labels.put("test",4);
-        String data = "bne $a0, $0, test	# this is another comment";
+        labels.put("test2",4);
+
+
+        String data = "beq $a0, $a1, test2";
+
+
+
         int line = 6;
 
         processLabels(data, line, labels);
@@ -242,7 +247,7 @@ public class test {
                 {
                 Integer targetLine = labels.get(arg[3]);
                 String offset = Integer.toString(targetLine - (line+1));
-                System.out.println(Instructions.bne(arg[2],arg[1], offset));
+                System.out.println(Instructions.bne(arg[1],arg[2], offset));
                 }
                 else
                 {
@@ -260,7 +265,46 @@ public class test {
          }
 
 
-        
+        //BEQ
+
+         else if(arg[0].equals("beq"))
+         {
+            if (arg.length >4 && !arg[4].startsWith("#") && arg[3].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+            else
+            {
+
+                
+                //Compute offset here so less clunky
+                if (labels.containsKey(arg[3]))
+                {
+                Integer targetLine = labels.get(arg[3]);
+                String offset = Integer.toString(targetLine - (line+1));
+
+
+               
+
+                System.out.println(Instructions.beq(arg[1],arg[2], offset));
+                }
+                else
+                {
+                    System.out.println("invalid label: " + arg[3]);
+                    return false;
+                }
+                
+                
+            }
+
+
+
+         }
+
+
+
+
 
 
          else if(arg.length == 1 && arg[0].equals(""))

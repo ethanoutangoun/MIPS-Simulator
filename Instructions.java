@@ -216,9 +216,46 @@ public class Instructions {
     //NOT DONE YET NEED TO ADD OFFSET
     public static String beq(String rs, String rt, String offset)
     {
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x10000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+            if(bin.length()>16)
+            {
+                bin = bin.substring(15);
+            }
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+        if((functions.registerToBinary(rs).equals("$")) || (functions.registerToBinary(rt).equals("$")))
+        {
+            return "invalid arguments";
+        }
 
 
-        String retString = "000100 " + functions.registerToBinary(rs) + " "  + functions.registerToBinary(rt); //MISSING OFFSET ADD OFFSET
+
+
+
+
+        String retString = "000100 " + functions.registerToBinary(rs) + " "  + functions.registerToBinary(rt) + " " + bin; //MISSING OFFSET ADD OFFSET
         return retString;
     }
 

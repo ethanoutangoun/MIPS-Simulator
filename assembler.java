@@ -26,7 +26,7 @@ public class assembler extends Instructions{
 
       try {
          //File myObj = new File(args[0]);
-         File myObj = new File("test2.asm");
+         File myObj = new File("test3.asm");
          Scanner myReader = new Scanner(myObj);
 
 
@@ -94,7 +94,7 @@ public class assembler extends Instructions{
    
 
 
-         System.out.println(labels.containsKey("testa"));
+         //System.out.println(labels.containsKey("testa"));
          
 
 
