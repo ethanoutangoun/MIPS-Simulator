@@ -26,7 +26,7 @@ public class assembler extends Instructions{
 
       try {
          //File myObj = new File(args[0]);
-         File myObj = new File("test3.asm");
+         File myObj = new File("test1.asm");
          Scanner myReader = new Scanner(myObj);
 
 

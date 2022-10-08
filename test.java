@@ -12,10 +12,10 @@ public class test {
 
 
         HashMap<String,Integer> labels = new HashMap<>();
-        labels.put("test2",4);
+        labels.put("test2",-4);
 
 
-        String data = "beq $a0, $a1, test2";
+        String data = "j test2";
 
 
 
@@ -302,6 +302,85 @@ public class test {
 
          }
 
+         //JUMP
+         else if(arg[0].equals("j"))
+         {
+
+            if (arg.length >2 && !arg[2].startsWith("#") && arg[1].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+
+            else
+            {
+
+                
+                //Compute offset here so less clunky
+                if (labels.containsKey(arg[1]))
+                {
+                Integer targetLine = labels.get(arg[1]);
+                String offset = Integer.toString(targetLine - 1);
+
+
+               
+                   
+                System.out.println(Instructions.j(offset));
+                }
+                else
+                {
+                    System.out.println("invalid label: " + arg[3]);
+                    return false;
+                }
+                
+                
+            }
+
+
+           
+
+
+         }
+
+
+         else if(arg[0].equals("jal"))
+         {
+
+            if (arg.length >2 && !arg[2].startsWith("#") && arg[1].indexOf("#") == -1 )
+            { 
+                System.out.println("invalid arguments");
+                return false;
+            }
+
+            else
+            {
+
+                
+                //Compute offset here so less clunky
+                if (labels.containsKey(arg[1]))
+                {
+                Integer targetLine = labels.get(arg[1]);
+                String offset = Integer.toString(targetLine - 1);
+
+
+               
+                   
+                System.out.println(Instructions.jal(offset));
+                }
+                else
+                {
+                    System.out.println("invalid label: " + arg[3]);
+                    return false;
+                }
+                
+                
+            }
+
+
+           
+
+
+         }
 
 
 

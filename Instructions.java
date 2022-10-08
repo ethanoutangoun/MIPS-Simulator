@@ -128,8 +128,8 @@ public class Instructions {
         String retString = "";
         retString += "000000";
 
-        retString+= " " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rd)
-         + " " + functions.registerToBinary(rt) + " 00000 100100" ;
+        retString+= " " + functions.registerToBinary(rs) + " " + functions.registerToBinary(rt)
+         + " " + functions.registerToBinary(rd) + " 00000 100100" ;
         return retString;
 
     }
@@ -213,7 +213,7 @@ public class Instructions {
 
 
 
-    //NOT DONE YET NEED TO ADD OFFSET
+  
     public static String beq(String rs, String rt, String offset)
     {
         String bin;
@@ -306,6 +306,87 @@ public class Instructions {
         + bin;
         return retString;
     }
+
+
+
+    public static String j(String offset)
+    {
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x4000000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+           
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+
+
+
+
+
+
+        String retString = "000010 "  + bin; 
+        return retString;
+    }
+
+
+    public static String jal(String offset)
+    {
+        String bin;
+        //parse imm to bin
+        if (offset.indexOf("#") != -1)
+        {
+            offset = offset.substring(0,(offset.indexOf("#")));
+        }
+        
+        try
+        {
+            
+            
+            Integer immediate = Integer.parseInt(offset);
+            
+            
+            bin = Integer.toBinaryString(0x4000000 | immediate).substring(1);
+
+            //If negative chop off first 16 bits
+           
+            
+            
+        }
+        catch(Exception e){
+            return "invalid arguments";
+        
+        }
+
+
+
+
+
+
+
+        String retString = "000011 "  + bin; 
+        return retString;
+    }
+
+
 
 
 
